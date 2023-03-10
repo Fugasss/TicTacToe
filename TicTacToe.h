@@ -1,8 +1,8 @@
 #pragma once
 
 #include <iostream>
-#include <Windows.h>
 #include "ConsoleExtension.h"
+#include "CellState.h"
 
 using namespace std;
 
@@ -14,16 +14,18 @@ public:
 		restart();
 	}
 
-	const char Cross = 'X';
-	const char Circle = 'O';
+	static const char Cross = 'X';
+	static const char Circle = 'O';
 	const int BorderSize; 
 	
-	bool place(int x, int y, int state);
-	bool checkForEnd(int* winnerState);
+	bool place(int x, int y, CellState state);
+	bool checkForEnd(CellState* winnerState);
 	void render();
 	void restart();
 
-	int gameBoard[3][3];
+	static const char StateToChar(CellState state);
+
+	CellState gameBoard[3][3];
 
 private:
 	int movesRemain;

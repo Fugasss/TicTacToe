@@ -133,6 +133,7 @@
     <ClCompile Include="TicTacToe.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CellState.h" />
     <ClInclude Include="ConsoleExtension.h" />
     <ClInclude Include="TicTacToe.h" />
   </ItemGroup>

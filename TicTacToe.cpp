@@ -1,10 +1,10 @@
 #include "TicTacToe.h"
 
-bool TicTacToe::place(int x, int y, int state) // state 1 - X, state 2 - O
+bool TicTacToe::place(int x, int y, CellState state) // state 1 - X, state 2 - O
 {
-	int currentState = gameBoard[x][y];
+	CellState currentState = gameBoard[x][y];
 
-	if (currentState == 0) {
+	if (currentState == CellState::None) {
 		gameBoard[x][y] = state;
 		movesRemain--;
 		return true;
@@ -13,12 +13,14 @@ bool TicTacToe::place(int x, int y, int state) // state 1 - X, state 2 - O
 	return false;
 }
 
-bool TicTacToe::checkForEnd(int* winnerState)
+bool TicTacToe::checkForEnd(CellState* winnerState)
 {
-	*winnerState = 0;
+	*winnerState = CellState::None;
 
-	for (int st = 1; st <= 2; st++)
+	for (int s = 1; s <= 2; s++)
 	{
+		CellState st = static_cast<CellState>(s);
+
 		bool buf = true;
 		for (int y = 0; y < 3; y++)
 		{
@@ -53,7 +55,7 @@ bool TicTacToe::checkForEnd(int* winnerState)
 	}
 
 	if (movesRemain <= 0) {
-		*winnerState = 0;
+		*winnerState = CellState::None;
 		return true;
 	}
 
@@ -81,11 +83,11 @@ void TicTacToe::render()
 		drawVerticalLine(BorderSize);
 		for (int y = 0; y < 3; y++)
 		{
-			int state = gameBoard[x][y];
+			CellState state = gameBoard[x][y];
 			char ch = ' ';
-			if (state == 1)
+			if (state == CellState::Cross)
 				ch = Cross;
-			if (state == 2)
+			if (state == CellState::Circle)
 				ch = Circle;
 
 			cout << " " << ch << " ";
@@ -128,7 +130,19 @@ void TicTacToe::restart()
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			gameBoard[i][j] = 0;
+			gameBoard[i][j] = CellState::None;
 		}
 	}
+}
+
+const char TicTacToe::StateToChar(CellState state)
+{
+	char c = ' ';
+
+	if (state == CellState::Cross)
+		c = Cross;
+	if (state == CellState::Circle)
+		c = Circle;
+
+	return c;
 }
