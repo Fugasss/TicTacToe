@@ -17,8 +17,11 @@ public:
 	static const char Cross = 'X';
 	static const char Circle = 'O';
 	const int BorderSize; 
-	
+
 	bool place(int x, int y, CellState state);
+	bool isFree(int x, int y);
+	void unplace(int x, int y);
+
 	bool checkForEnd(CellState* winnerState);
 	void render();
 	void restart();
@@ -26,8 +29,6 @@ public:
 	static const char StateToChar(CellState state);
 
 	CellState gameBoard[3][3];
-
-private:
 	int movesRemain;
 };
 

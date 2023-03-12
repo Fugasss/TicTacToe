@@ -3,19 +3,41 @@
 #include "TicTacToe.h"
 #include "ConsoleExtension.h"
 #include "CellState.h"
+#include "bot.h"
 
 using namespace std;
 
-int main(VOID)
+void readPlayerMove(int* x, int* y) 
+{
+	cin >> *x >> *y;
+	(*x)--;
+	(*y)--;
+}
+void readBotMove(Bot* bot, int* x, int* y) {
+	std::pair<int, int> mv = (*bot).makeMove();
+	*x = mv.first;
+	*y = mv.second;
+}
+
+int main()
 {
 	bool exitGame = false;
 
 	TicTacToe ttt = TicTacToe(1);
+
 	CellState currentState = CellState::Cross;
+
+	Bot bot = Bot(CellState::Circle, &ttt);
+	
 	ttt.render();
 
-	while (!exitGame) {
+	bool isAi = false;
+	int isAiInt = 0;
+	cout << "Select game mode [0 - with AI, 1 - with second player]: ";
+	cin >> isAiInt;
+	isAi = isAiInt == 0;
 
+	while (!exitGame) {
 		cout << "\n\n\n";
 
 		int x = 0, y = 0;
@@ -28,10 +50,22 @@ int main(VOID)
 
 			cout << "Current player: " << TicTacToe::StateToChar(currentState) << endl;
 			cout << "Select cell: ";
-			cin >> x >> y;
+			
+			if (isAi) 
+			{
+				if (currentState == bot.PlayState) {
+					readBotMove(&bot, &x, &y);
+				}
+				else {
+					readPlayerMove(&x, &y);
+				}
+			}
+			else
+			{
+				readPlayerMove(&x, &y);
+			}
 
-			x--;
-			y--;
+			
 		} while (!ttt.place(x, y, currentState));
 
 		currentState = currentState == CellState::Cross ? CellState::Circle : CellState::Cross;
@@ -64,8 +98,6 @@ int main(VOID)
 			}
 		}
 	}
-
-
 
 	return 0;
 }

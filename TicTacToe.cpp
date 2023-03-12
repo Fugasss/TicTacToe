@@ -13,6 +13,20 @@ bool TicTacToe::place(int x, int y, CellState state) // state 1 - X, state 2 - O
 	return false;
 }
 
+bool TicTacToe::isFree(int x, int y)
+{
+	return gameBoard[x][y] == CellState::None;
+}
+
+void TicTacToe::unplace(int x, int y)
+{
+	if (gameBoard[x][y] != CellState::None) {
+		movesRemain++;
+	}
+	gameBoard[x][y] = CellState::None;
+	
+}
+
 bool TicTacToe::checkForEnd(CellState* winnerState)
 {
 	*winnerState = CellState::None;
@@ -21,6 +35,7 @@ bool TicTacToe::checkForEnd(CellState* winnerState)
 	{
 		CellState st = static_cast<CellState>(s);
 
+		//rows
 		bool buf = true;
 		for (int y = 0; y < 3; y++)
 		{
@@ -34,6 +49,7 @@ bool TicTacToe::checkForEnd(CellState* winnerState)
 			buf = true;
 		}
 
+		//columns
 		buf = true;
 		for (int x = 0; x < 3; x++)
 		{
@@ -47,6 +63,7 @@ bool TicTacToe::checkForEnd(CellState* winnerState)
 			buf = true;
 		}
 
+		//diagonals
 		if (gameBoard[0][0] == st && gameBoard[1][1] == st && gameBoard[2][2] == st ||
 			gameBoard[2][0] == st && gameBoard[1][1] == st && gameBoard[0][2] == st) {
 			*winnerState = st;
