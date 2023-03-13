@@ -137,7 +137,14 @@
     <ClInclude Include="Bot.h" />
     <ClInclude Include="CellState.h" />
     <ClInclude Include="ConsoleExtension.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="TicTacToe.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TicTacToe.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="images\Icon36x36.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

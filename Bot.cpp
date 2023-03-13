@@ -4,7 +4,7 @@ pair<int, int> Bot::makeMove()
 {
 	if (Ttt->isFree(1, 1)) 
 	{
-		return make_pair(1, 1);
+		return make_pair(1, 1);	
 	}
 
 	int x = 0, y = 0;
@@ -33,7 +33,6 @@ pair<int, int> Bot::makeMove()
 			}
 		}
 	}
-
 
 	////TEST VISUALIZING
 	//std::cout << std::endl;

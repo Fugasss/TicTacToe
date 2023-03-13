@@ -6,4 +6,3 @@
 using namespace std;
 
 void set_cursor(int x, int y);
-
