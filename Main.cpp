@@ -9,9 +9,13 @@ using namespace std;
 
 void readPlayerMove(int* x, int* y) 
 {
-	cin >> *x >> *y;
-	(*x)--;
-	(*y)--;
+	int n;
+
+	cin >> n;
+	n--;
+
+	(*x) = n / 3;
+	(*y) = n % 3;
 }
 void readBotMove(Bot* bot, int* x, int* y) {
 	std::pair<int, int> mv = (*bot).makeMove();

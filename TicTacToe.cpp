@@ -116,7 +116,6 @@ void TicTacToe::render()
 
 
 	// draw example board
-
 	int offsetX = BorderSize * 4 + 20;
 	int offsetY = 0;
 	set_cursor(offsetX, offsetY++);
@@ -129,7 +128,7 @@ void TicTacToe::render()
 		drawVerticalLine(BorderSize);
 		for (int y = 0; y < 3; y++)
 		{
-			cout << x + 1 << " " << y + 1;
+			cout << " " << 3 * x + y + 1 << " ";
 
 			drawVerticalLine(BorderSize);
 		}
